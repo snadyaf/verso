@@ -174,6 +174,7 @@ A escolha dos componentes busca manter uma interface consistente e reutilizável
 ```text
 src/
 ├── assets/
+│
 ├── components/
 │   ├── BookCard/
 │   ├── Header/
@@ -187,6 +188,7 @@ src/
 │   ├── Login/
 │   ├── Register/
 │   ├── Profile/
+│   ├── PersonalLibrary/
 │   └── Reservations/
 │
 ├── services/
