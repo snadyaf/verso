@@ -7,7 +7,7 @@ Daily — 02/09
 Objetivo: Kickoff e alinhamento inicial
 
  Apresentar visão e objetivo do MVP
- Definir UI/UX
+ Definir UI/UX (Sugestão Sid | Sugestão Snádya (https://www.figma.com/make/i2bjCxCUpJwWXP6IrVvegd/High-Fidelity-Literary-Platform-Prototype?t=Ea59C0el2QIS97XS-1))
  Revisar requisitos principais
  Validar divisão das tarefas
  Alinhar stack: React + Vite + PrimeReact + Tailwind
