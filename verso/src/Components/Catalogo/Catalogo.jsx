@@ -4,6 +4,7 @@ import { Button } from "primereact/button";
 import { DataView } from "primereact/dataview";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { Message } from "primereact/message";
+import BookCard from "../BookCard/BookCard";
 import "./Catalogo.css";
 
 const BASE_URL = "https://gutendex.com/books/";
@@ -59,29 +60,12 @@ function Catalogo() {
     fetchBooks(prevUrl);
   };
 
-  const bookTemplate = (book) => {
-    const cover = book.formats?.["image/jpeg"];
-    const authors = book.authors?.map((a) => a.name).join(", ");
-
-    return (
-      <div className="catalogo-card" key={book.id}>
-        <div className="catalogo-card-cover">
-          {cover ? (
-            <img src={cover} alt={book.title} />
-          ) : (
-            <div className="catalogo-card-no-cover">Sem capa</div>
-          )}
-        </div>
-        <div className="catalogo-card-info">
-          <h3>{book.title}</h3>
-          <p>{authors || "Autor desconhecido"}</p>
-        </div>
-      </div>
-    );
-  };
-
   const listTemplate = (items) => (
-    <div className="catalogo-grid">{items.map(bookTemplate)}</div>
+    <div className="catalogo-grid">
+      {items.map((book) => (
+        <BookCard key={book.id} book={book} />
+      ))}
+    </div>
   );
 
   return (

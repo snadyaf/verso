@@ -1,9 +1,35 @@
+:root {
+  --color-background: #f7f4ec;
+  --color-surface: #fffdf8;
+  --color-border: #ddd7ca;
+  --color-text: #182936;
+  --color-text-secondary: #586671;
+  --color-primary: #315b6b;
+  --color-primary-hover: #264c5b;
+}
+
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
 }
 
 html,
 body {
-    margin: 0;
-    padding: 0;
+  background: #1b2c47;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
 }
