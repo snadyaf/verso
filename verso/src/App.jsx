@@ -10,11 +10,9 @@ function App() {
   return (
     <>
      <Navbar />
-
      <Hero />
 
      <CTA />
-
      <Footer />
     </>
   )
