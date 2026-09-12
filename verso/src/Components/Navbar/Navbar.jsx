@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { useNavigate } from "react-router";
 
 import { Menubar } from 'primereact/menubar';
 import { Button } from 'primereact/button';
@@ -8,15 +8,20 @@ import './Navbar.css';
 
 export default function Navbar() {
 
+    const navigate = useNavigate();
+
     const items = [
         {
-            label: 'Início'
+            label: 'Início',
+            command: () => navigate('/')
         },
         {
-            label: 'Explorar'
+            label: 'Explorar',
+            command: () => navigate('/explorar')
         },
         {
-            label: 'Minha Biblioteca'
+            label: 'Minha Biblioteca',
+            command: () => navigate('/biblioteca')
         }
     ];
 
@@ -29,31 +34,10 @@ export default function Navbar() {
 
     const end = (
         <div className="navbar-actions">
-
-            <Button
-                icon="pi pi-search"
-                className="navbar-icon-button"
-                text
-            />
-
-            <Button
-                icon="pi pi-sun"
-                className="navbar-icon-button"
-                text
-            />
-
-            <Button
-                icon="pi pi-book"
-                className="navbar-icon-button"
-                text
-            />
-
-            <Avatar
-                label="A"
-                shape="circle"
-                className="navbar-avatar"
-            />
-
+            <Button icon="pi pi-search" className="navbar-icon-button" text />
+            <Button icon="pi pi-sun" className="navbar-icon-button" text />
+            <Button icon="pi pi-book" className="navbar-icon-button" text />
+            <Avatar label="A" shape="circle" className="navbar-avatar" />
         </div>
     );
 
