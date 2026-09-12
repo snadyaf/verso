@@ -4,7 +4,7 @@ import Footer from './Components/Footer/Footer'
 import AppRoutes from './Routes/AppRoutes'
 
 function App() {
-  
+
   return (
     <>
      <Navbar />
