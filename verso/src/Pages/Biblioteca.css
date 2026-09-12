@@ -1,0 +1,260 @@
+/* Pages/Biblioteca.css */
+
+.biblioteca {
+    min-height: 100vh;
+    background-color: #0b1526;
+    color: #e8ecf1;
+}
+
+/* ===== HEADER ===== */
+.biblioteca-header {
+    padding: 40px 60px 0 60px;
+    border-bottom: 1px solid #1a2740;
+}
+
+.biblioteca-label p {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #d4a94e;
+    text-transform: uppercase;
+    margin: 0 0 8px 0;
+}
+
+.biblioteca-header h1 {
+    font-family: "Georgia", "Times New Roman", serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 40px;
+    color: #f5f2ea;
+    margin: 0 0 10px 0;
+}
+
+.biblioteca-subtitulo {
+    font-size: 14px;
+    color: #a9b4c9;
+    margin: 0 0 28px 0;
+}
+
+/* ===== TABS ===== */
+.biblioteca-tabs {
+    display: flex;
+    gap: 8px;
+}
+
+.tab-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: #6b7691;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 12px 18px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.tab-item:hover {
+    color: #a9b4c9;
+}
+
+.tab-item.ativa {
+    color: #f5f2ea;
+    background-color: #131f36;
+    border-bottom: 2px solid #4a6fa5;
+    border-radius: 8px 8px 0 0;
+}
+
+.tab-item i {
+    font-size: 14px;
+}
+
+.icone-rosa { color: #e0567a; }
+.icone-azul { color: #4a6fa5; }
+.icone-cinza { color: #6b7691; }
+
+.tab-item.ativa .icone-cinza {
+    color: #e8ecf1;
+}
+
+/* ===== CONTEÚDO ===== */
+.biblioteca-conteudo {
+    padding: 60px 60px;
+}
+
+/* ===== ESTADO VAZIO ===== */
+.estado-vazio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    max-width: 480px;
+    margin: 40px auto;
+}
+
+.estado-vazio-icone {
+    width: 64px;
+    height: 64px;
+    background-color: #182338;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+.estado-vazio-icone i {
+    font-size: 24px;
+    color: #4a6fa5;
+}
+
+.estado-vazio h2 {
+    font-family: "Georgia", "Times New Roman", serif;
+    font-style: italic;
+    font-size: 22px;
+    color: #f5f2ea;
+    margin: 0 0 12px 0;
+    line-height: 1.4;
+}
+
+.estado-vazio p {
+    font-size: 14px;
+    color: #7ea3d1;
+    margin: 0 0 28px 0;
+}
+
+.btn-explorar.p-button {
+    background-color: #4a6fa5;
+    border: none;
+    color: #ffffff;
+    font-weight: 700;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.btn-explorar.p-button:hover {
+    background-color: #3d5c8c;
+}
+
+/* ===== GRID DE LIVROS (reaproveita estilos do Explorar) ===== */
+.livros-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 24px;
+}
+
+.livro-card {
+    background-color: #131f36;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #1a2740;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+    cursor: pointer;
+}
+
+.livro-card:hover {
+    transform: translateY(-4px);
+    border-color: #3a4a6b;
+}
+
+.livro-capa {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    background: linear-gradient(135deg, #1a2740, #0f1a30);
+    overflow: hidden;
+}
+
+.livro-capa img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.badge-digital {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    background-color: #d4a94e;
+    color: #0b1526;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 4px 10px;
+    border-radius: 6px;
+}
+
+.btn-favorito {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: rgba(11, 21, 38, 0.6);
+    border: none;
+    color: #e8ecf1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+}
+
+.btn-favorito.ativo {
+    color: #e0567a;
+}
+
+.livro-info {
+    padding: 16px;
+}
+
+.livro-info h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #f5f2ea;
+    margin: 0 0 4px 0;
+    line-height: 1.3;
+}
+
+.livro-autor {
+    font-size: 13px;
+    color: #7ea3d1;
+    margin: 0 0 10px 0;
+}
+
+.livro-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    color: #a9b4c9;
+    border: 1px solid #2a3a5a;
+    padding: 3px 8px;
+    border-radius: 6px;
+    text-transform: uppercase;
+}
+
+/* ===== RESPONSIVO ===== */
+@media (max-width: 768px) {
+    .biblioteca-header,
+    .biblioteca-conteudo {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .biblioteca-tabs {
+        overflow-x: auto;
+    }
+}
