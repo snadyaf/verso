@@ -11,6 +11,13 @@ function BookCard({ book }) {
   const authors = book.authors?.map((a) => a.name).join(", ") || "Autor desconhecido";
   const tags = book.subjects?.slice(0, 3) || [];
 
+  const description = book.summaries?.[0] || "Sem descrição disponível para este livro.";
+  const categories = book.subjects?.length > 0 ? book.subjects : ["Sem categoria"];
+
+  const pdfUrl = Object.entries(book.formats || {}).find(([type]) => type.includes("pdf"))?.[1];
+  const epubUrl = Object.entries(book.formats || {}).find(([type]) => type.includes("epub"))?.[1];
+  const readUrl = book.formats?.["text/html"];
+
   return (
     <>
       <div className="bookcard">
@@ -48,7 +55,7 @@ function BookCard({ book }) {
         visible={showDetails}
         onHide={() => setShowDetails(false)}
         className="bookcard-dialog"
-        style={{ width: "480px" }}
+        style={{ width: "560px" }}
       >
         <div className="bookcard-dialog-content">
           {cover ? (
@@ -59,12 +66,52 @@ function BookCard({ book }) {
 
           <div className="bookcard-dialog-info">
             <p><strong>Autor(es):</strong> {authors}</p>
-            {book.subjects?.length > 0 && (
-              <p><strong>Assuntos:</strong> {book.subjects.join(", ")}</p>
-            )}
-            {book.download_count !== undefined && (
-              <p><strong>Downloads:</strong> {book.download_count.toLocaleString()}</p>
-            )}
+
+            <p className="bookcard-dialog-description">{description}</p>
+
+            <p><strong>Categorias:</strong></p>
+            <div className="bookcard-dialog-tags">
+              {categories.slice(0, 6).map((cat, i) => (
+                <Tag key={i} value={cat} />
+              ))}
+            </div>
+
+            <div className="bookcard-dialog-formats">
+              <Tag
+                value={pdfUrl ? "PDF disponível" : "PDF indisponível"}
+                severity={pdfUrl ? "success" : "danger"}
+              />
+              <Tag
+                value={epubUrl ? "EPUB disponível" : "EPUB indisponível"}
+                severity={epubUrl ? "success" : "danger"}
+              />
+            </div>
+
+            <div className="bookcard-dialog-links">
+              {readUrl && (
+                <Button
+                  label="Ler online"
+                  icon="pi pi-book"
+                  onClick={() => window.open(readUrl, "_blank")}
+                />
+              )}
+              {epubUrl && (
+                <Button
+                  label="Baixar EPUB"
+                  icon="pi pi-download"
+                  outlined
+                  onClick={() => window.open(epubUrl, "_blank")}
+                />
+              )}
+              {pdfUrl && (
+                <Button
+                  label="Baixar PDF"
+                  icon="pi pi-download"
+                  outlined
+                  onClick={() => window.open(pdfUrl, "_blank")}
+                />
+              )}
+            </div>
           </div>
         </div>
       </Dialog>
