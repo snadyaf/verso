@@ -34,10 +34,9 @@ export default function Footer() {
 
                     <h3>PLATAFORMA</h3>
 
-                    <a href="#">Início</a>
-                    <a href="#">Explorar</a>
-                    <a href="#">Minha Biblioteca</a>
-                    <a href="#">Minhas Reservas</a>
+                    <a href="/">Início</a>
+                    <a href="/Explorar">Explorar</a>
+                    <a href="/Biblioteca">Minha Biblioteca</a>
 
                 </div>
 
@@ -52,20 +51,7 @@ export default function Footer() {
                     <a href="#">Criar conta</a>
 
                 </div>
-
-
-                {/* Gêneros */}
-                <div className="footer-column">
-
-                    <h3>GÊNEROS</h3>
-
-                    <a href="#">Romance</a>
-                    <a href="#">Ficção</a>
-                    <a href="#">Clássicos</a>
-                    <a href="#">Mistério</a>
-                    <a href="#">Poesia</a>
-
-                </div>
+                
 
             </div>
 

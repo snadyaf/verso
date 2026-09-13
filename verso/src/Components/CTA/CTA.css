@@ -92,6 +92,97 @@
 
 }
 
+/* ===== SEÇÃO EM DESTAQUE ===== */
+.destaque-section {
+    padding: 60px;
+    background-color: #0b1526;
+}
+
+.destaque-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 32px;
+}
+
+.destaque-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.destaque-label span {
+    width: 24px;
+    height: 2px;
+    background-color: #d4a94e;
+}
+
+.destaque-label p {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #d4a94e;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.destaque-titulo-wrapper h2 {
+    font-family: "Georgia", "Times New Roman", serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 32px;
+    color: #f5f2ea;
+    margin: 0;
+}
+
+.ver-todos {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #7ea3d1;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.15s ease;
+}
+
+.ver-todos:hover {
+    color: #a9c4e8;
+}
+
+.ver-todos i {
+    font-size: 11px;
+}
+
+.destaque-status {
+    text-align: center;
+    padding: 40px 0;
+    color: #6b7691;
+    font-size: 15px;
+}
+
+.destaque-erro {
+    color: #e07a7a;
+}
+
+@media (max-width: 768px) {
+    .destaque-section {
+        padding: 32px 20px;
+    }
+
+    .destaque-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .destaque-titulo-wrapper h2 {
+        font-size: 24px;
+    }
+}
+
 @media (max-width: 480px) {
 
     .cta-section {

@@ -34,7 +34,7 @@ export default function Navbar() {
 
     const end = (
         <div className="navbar-actions">
-            <Button icon="pi pi-search" className="navbar-icon-button" text />
+            <a href="/Explorar"><Button icon="pi pi-search" className="navbar-icon-button" text /></a>
             <Button icon="pi pi-sun" className="navbar-icon-button" text />
             <Button icon="pi pi-book" className="navbar-icon-button" text />
             <Avatar label="A" shape="circle" className="navbar-avatar" />

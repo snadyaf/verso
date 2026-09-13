@@ -163,73 +163,19 @@
 }
 
 /* ===== GRID DE LIVROS ===== */
-.livros-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 24px;
-}
+
 
 /* ===== CARD DO LIVRO ===== */
-.livro-card {
-    background-color: #131f36;
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid #1a2740;
-    transition: transform 0.2s ease, border-color 0.2s ease;
-    cursor: pointer;
-}
 
-.livro-card:hover {
-    transform: translateY(-4px);
-    border-color: #3a4a6b;
-}
+
+
 
 /* ===== CAPA ===== */
-.livro-capa {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 3 / 4;
-    background: linear-gradient(135deg, #1a2740, #0f1a30);
-    overflow: hidden;
-}
 
-.livro-capa img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
 
-.badge-digital {
-    position: absolute;
-    bottom: 12px;
-    left: 12px;
-    background-color: #d4a94e;
-    color: #0b1526;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    padding: 4px 10px;
-    border-radius: 6px;
-}
 
-.btn-favorito {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background-color: rgba(11, 21, 38, 0.6);
-    border: none;
-    color: #e8ecf1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    backdrop-filter: blur(4px);
-    transition: background-color 0.15s ease;
-}
+
+
 
 .btn-favorito:hover {
     background-color: rgba(11, 21, 38, 0.85);
@@ -240,9 +186,7 @@
 }
 
 /* ===== INFO DO LIVRO ===== */
-.livro-info {
-    padding: 16px;
-}
+
 
 .livro-info h3 {
     font-size: 16px;
@@ -261,32 +205,11 @@
     margin: 0 0 10px 0;
 }
 
-.livro-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-bottom: 10px;
-}
 
-.tag {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.4px;
-    color: #a9b4c9;
-    border: 1px solid #2a3a5a;
-    padding: 3px 8px;
-    border-radius: 6px;
-    text-transform: uppercase;
-}
 
-.livro-downloads {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 12px;
-    color: #6b7691;
-    margin: 0;
-}
+
+
+
 
 .livro-downloads i {
     font-size: 11px;
@@ -308,8 +231,5 @@
         align-items: stretch;
     }
 
-    .livros-grid {
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-        gap: 14px;
-    }
+    
 }

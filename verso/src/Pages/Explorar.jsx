@@ -3,6 +3,7 @@ import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
 
 import "./Explorar.css";
+import "../styles/LivroCard.css";
 
 export default function Explorar() {
 
