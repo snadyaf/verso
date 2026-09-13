@@ -1,16 +1,14 @@
-
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { Tag } from 'primereact/tag';
 
 import './Hero.css';
 
-export default function Hero() {
+export default function Hero({ query, onQueryChange, onSearch }) {
 
     return (
         <section className="hero">
 
-            {/* LADO ESQUERDO */}
             <div className="hero-content">
 
                 <div className="hero-label">
@@ -30,18 +28,18 @@ export default function Hero() {
                     viagem.
                 </p>
 
-                {/* PESQUISA */}
-                <div className="hero-search">
+                <form className="hero-search" onSubmit={onSearch}>
 
                     <InputText
                         placeholder="Buscar livros, autores..."
+                        value={query}
+                        onChange={(e) => onQueryChange(e.target.value)}
                     />
 
-                    <Button label="Buscar" />
+                    <Button label="Buscar" type="submit" />
 
-                </div>
+                </form>
 
-                {/* BOTÕES */}
                 <div className="hero-buttons">
 
                     <Button
@@ -56,7 +54,6 @@ export default function Hero() {
 
                 </div>
 
-                {/* INFORMAÇÕES */}
                 <div className="hero-info">
 
                     <div>
@@ -78,8 +75,6 @@ export default function Hero() {
 
             </div>
 
-
-            {/* LADO DIREITO */}
             <div className="hero-visual">
 
                 <Tag
