@@ -1,87 +1,17 @@
-import { useState } from "react";
-import { InputText } from "primereact/inputtext";
-import { Button } from "primereact/button";
 import { DataView } from "primereact/dataview";
+import { Button } from "primereact/button";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { Message } from "primereact/message";
+import BookCard from "../BookCard/BookCard";
 import "./Catalogo.css";
 
-const BASE_URL = "https://gutendex.com/books/";
-
-function Catalogo() {
-  const [query, setQuery] = useState("");
-  const [books, setBooks] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [searched, setSearched] = useState(false);
-  const [nextUrl, setNextUrl] = useState(null);
-  const [prevUrl, setPrevUrl] = useState(null);
-  const [page, setPage] = useState(1);
-
-  const fetchBooks = async (url) => {
-    setLoading(true);
-    setError(false);
-
-    try {
-      const res = await fetch(url);
-      if (!res.ok) throw new Error("Falha na requisição");
-      const data = await res.json();
-      setBooks(data.results || []);
-      setNextUrl(data.next);
-      setPrevUrl(data.previous);
-    } catch (err) {
-      setError(true);
-      setBooks([]);
-      setNextUrl(null);
-      setPrevUrl(null);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (!query.trim()) return;
-    setSearched(true);
-    setPage(1);
-    fetchBooks(`${BASE_URL}?search=${encodeURIComponent(query)}`);
-  };
-
-  const handleNext = () => {
-    if (!nextUrl) return;
-    setPage((p) => p + 1);
-    fetchBooks(nextUrl);
-  };
-
-  const handlePrev = () => {
-    if (!prevUrl) return;
-    setPage((p) => p - 1);
-    fetchBooks(prevUrl);
-  };
-
-  const bookTemplate = (book) => {
-    const cover = book.formats?.["image/jpeg"];
-    const authors = book.authors?.map((a) => a.name).join(", ");
-
-    return (
-      <div className="catalogo-card" key={book.id}>
-        <div className="catalogo-card-cover">
-          {cover ? (
-            <img src={cover} alt={book.title} />
-          ) : (
-            <div className="catalogo-card-no-cover">Sem capa</div>
-          )}
-        </div>
-        <div className="catalogo-card-info">
-          <h3>{book.title}</h3>
-          <p>{authors || "Autor desconhecido"}</p>
-        </div>
-      </div>
-    );
-  };
-
+function Catalogo({ books, loading, error, searched, query, page, nextUrl, prevUrl, onNext, onPrev }) {
   const listTemplate = (items) => (
-    <div className="catalogo-grid">{items.map(bookTemplate)}</div>
+    <div className="catalogo-grid">
+      {items.map((book) => (
+        <BookCard key={book.id} book={book} />
+      ))}
+    </div>
   );
 
   return (
@@ -89,15 +19,6 @@ function Catalogo() {
       <div className="catalogo-header">
         <h1>Catálogo de Livros</h1>
         <p>Encontre algo novo para ler</p>
-
-        <form className="catalogo-search" onSubmit={handleSearch}>
-          <InputText
-            placeholder="Busque por título, autor ou assunto..."
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-          />
-          <Button label="Pesquisar" type="submit" />
-        </form>
       </div>
 
       <div className="catalogo-content">
@@ -124,7 +45,7 @@ function Catalogo() {
               <Button
                 label="Anterior"
                 icon="pi pi-chevron-left"
-                onClick={handlePrev}
+                onClick={onPrev}
                 disabled={!prevUrl}
                 outlined
               />
@@ -133,12 +54,18 @@ function Catalogo() {
                 label="Próxima"
                 icon="pi pi-chevron-right"
                 iconPos="right"
-                onClick={handleNext}
+                onClick={onNext}
                 disabled={!nextUrl}
                 outlined
               />
             </div>
           </>
+        )}
+
+        {!loading && !error && !searched && (
+          <div className="catalogo-status">
+            <p>Use a busca acima para encontrar livros.</p>
+          </div>
         )}
       </div>
     </section>
