@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Tag } from "primereact/tag";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
+import { getPhysicalAvailability } from "../../fixos/physicalBooks";
 import "./BookCard.css";
 
 function BookCard({ book }) {
@@ -18,6 +19,8 @@ function BookCard({ book }) {
   const epubUrl = Object.entries(book.formats || {}).find(([type]) => type.includes("epub"))?.[1];
   const readUrl = book.formats?.["text/html"];
 
+  const physical = getPhysicalAvailability(book.id);
+
   return (
     <>
       <div className="bookcard">
@@ -26,6 +29,13 @@ function BookCard({ book }) {
             <img src={cover} alt={book.title} />
           ) : (
             <div className="bookcard-no-cover">Sem capa</div>
+          )}
+
+          {physical.available && (
+            <span className="bookcard-stock-badge">
+              <i className="pi pi-map-marker" />
+              Físico disponível
+            </span>
           )}
         </div>
 
@@ -84,6 +94,14 @@ function BookCard({ book }) {
               <Tag
                 value={epubUrl ? "EPUB disponível" : "EPUB indisponível"}
                 severity={epubUrl ? "success" : "danger"}
+              />
+              <Tag
+                value={
+                  physical.available
+                    ? `Disponível fisicamente (${physical.quantity} un.)`
+                    : "Indisponível fisicamente"
+                }
+                severity={physical.available ? "success" : "danger"}
               />
             </div>
 
