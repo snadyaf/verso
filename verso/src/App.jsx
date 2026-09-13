@@ -6,7 +6,6 @@ import Navbar from './components/Navbar/Navbar'
 import Hero from './components/Hero/Hero'
 import Footer from './components/Footer/Footer'
 import CTA from './components/CTA/CTA'
-import Catalogo from './components/Catalogo/Catalogo'
 import Login from './components/Login/Login'
 import Perfil from './components/Perfil/Perfil'
 
@@ -70,13 +69,10 @@ function Home() {
         query={query}
         onQueryChange={setQuery}
         onSearch={handleSearch}
-      />
-      <Catalogo
         books={books}
         loading={loading}
         error={error}
         searched={searched}
-        query={query}
         page={page}
         nextUrl={nextUrl}
         prevUrl={prevUrl}
