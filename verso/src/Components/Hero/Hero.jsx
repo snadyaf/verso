@@ -1,112 +1,155 @@
-
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
-import { Tag } from 'primereact/tag';
+import { DataView } from 'primereact/dataview';
+import { ProgressSpinner } from 'primereact/progressspinner';
+import { Message } from 'primereact/message';
+import BookCard from '../BookCard/BookCard';
 
 import './Hero.css';
 
-export default function Hero() {
+export default function Hero({
+    query,
+    onQueryChange,
+    onSearch,
+    books,
+    loading,
+    error,
+    searched,
+    page,
+    nextUrl,
+    prevUrl,
+    onNext,
+    onPrev,
+}) {
+
+    const listTemplate = (items) => (
+        <div className="hero-results-grid">
+            {items.map((book) => (
+                <BookCard key={book.id} book={book} />
+            ))}
+        </div>
+    );
 
     return (
         <section className="hero">
 
-            {/* LADO ESQUERDO */}
-            <div className="hero-content">
+            <div className="hero-top">
 
-                <div className="hero-label">
-                    <span></span>
-                    <p>PLATAFORMA LITERÁRIA</p>
-                </div>
+                {/* LADO ESQUERDO */}
+                <div className="hero-content">
 
-                <h1>
-                    Seu próximo mundo
-                    <br />
-                    <span>começa em uma página.</span>
-                </h1>
-
-                <p className="hero-description">
-                    Descubra histórias, encontre novos autores e
-                    transforme alguns minutos do seu dia em uma nova
-                    viagem.
-                </p>
-
-                {/* PESQUISA */}
-                <div className="hero-search">
-
-                    <InputText
-                        placeholder="Buscar livros, autores..."
-                    />
-
-                    <Button label="Buscar" />
-
-                </div>
-
-                {/* BOTÕES */}
-                <div className="hero-buttons">
-
-                    <Button
-                        label="Explorar livros"
-                        className="btn-explorar"
-                    />
-
-                    <Button
-                        label="Minha biblioteca"
-                        className="btn-biblioteca"
-                    />
-
-                </div>
-
-                {/* INFORMAÇÕES */}
-                <div className="hero-info">
-
-                    <div>
-                        <strong>12+</strong>
-                        <small>Obras</small>
+                    <div className="hero-label">
+                        <span></span>
+                        <p>PLATAFORMA LITERÁRIA</p>
                     </div>
 
-                    <div>
-                        <strong>PDF & EPUB</strong>
-                        <small>Formatos digitais</small>
+                    <h1>
+                        Seu próximo mundo
+                        <br />
+                        <span>começa em uma página.</span>
+                    </h1>
+
+                    <p className="hero-description">
+                        Descubra histórias, encontre novos autores e
+                        transforme alguns minutos do seu dia em uma nova
+                        viagem.
+                    </p>
+
+                    <form className="hero-search" onSubmit={onSearch}>
+
+                        <InputText
+                            placeholder="Buscar livros, autores..."
+                            value={query}
+                            onChange={(e) => onQueryChange(e.target.value)}
+                        />
+
+                        <Button label="Buscar" type="submit" />
+
+                    </form>
+
+                    <div className="hero-buttons">
+
+                        <Button
+                            label="Explorar livros"
+                            className="btn-explorar"
+                        />
+
+                        <Button
+                            label="Minha biblioteca"
+                            className="btn-biblioteca"
+                        />
+
                     </div>
 
-                    <div>
-                        <strong>Reserva</strong>
-                        <small>Física disponível</small>
+                    <div className="hero-info">
+
+                        <div>
+                            <strong>12+</strong>
+                            <small>Obras</small>
+                        </div>
+
+                        <div>
+                            <strong>PDF & EPUB</strong>
+                            <small>Formatos digitais</small>
+                        </div>
+
+                        <div>
+                            <strong>Reserva</strong>
+                            <small>Física disponível</small>
+                        </div>
+
                     </div>
 
+                </div>
+
+                {/* LADO DIREITO */}
+                <div className="hero-visual">
                 </div>
 
             </div>
 
+            {/* RESULTADOS DA BUSCA */}
+            <div className="hero-results">
 
-            {/* LADO DIREITO */}
-            <div className="hero-visual">
+                {loading && (
+                    <div className="hero-results-status">
+                        <ProgressSpinner style={{ width: "40px", height: "40px" }} strokeWidth="4" />
+                        <p>Buscando livros...</p>
+                    </div>
+                )}
 
-                <Tag
-                    value={
-                        <>
-                            <strong>Digital</strong>
-                            <br />
-                            PDF + EPUB
-                        </>
-                    }
-                    className="digital-tag"
-                />
+                {error && !loading && (
+                    <Message severity="error" text="Não foi possível buscar os livros agora. Tente novamente." />
+                )}
 
-                <img
-                    src="/livros.png"
-                    alt="Livros"
-                    className="hero-books"
-                />
+                {!loading && !error && searched && books.length === 0 && (
+                    <Message severity="warn" text={`Nenhum livro encontrado para "${query}".`} />
+                )}
 
-                <Tag
-                    value="★ 4.9"
-                    className="rating-tag"
-                />
+                {!loading && !error && books.length > 0 && (
+                    <>
+                        <DataView value={books} listTemplate={listTemplate} />
 
-                <span className="rating-book">
-                    Grande Sertão
-                </span>
+                        <div className="hero-pagination">
+                            <Button
+                                label="Anterior"
+                                icon="pi pi-chevron-left"
+                                onClick={onPrev}
+                                disabled={!prevUrl}
+                                outlined
+                            />
+                            <span className="hero-page-label">Página {page}</span>
+                            <Button
+                                label="Próxima"
+                                icon="pi pi-chevron-right"
+                                iconPos="right"
+                                onClick={onNext}
+                                disabled={!nextUrl}
+                                outlined
+                            />
+                        </div>
+                    </>
+                )}
 
             </div>
 

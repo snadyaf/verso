@@ -131,3 +131,44 @@
 .bookcard-dialog-info strong {
   color: #f4c95d;
 }
+
+.bookcard-dialog-description {
+  font-style: italic;
+  color: #d8c8a8;
+}
+
+.bookcard-dialog-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.bookcard-dialog-tags .p-tag {
+  background: #2a2119;
+  color: #f4c95d;
+  border: 1px solid #3d332a;
+  font-size: 0.7rem;
+}
+
+.bookcard-dialog-formats {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.bookcard-dialog-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.bookcard-dialog-links .p-button:not(.p-button-outlined) {
+  background: #a6472e;
+  border: none;
+}
+
+.bookcard-dialog-links .p-button.p-button-outlined {
+  border-color: #a6472e;
+  color: #f4c95d;
+}
