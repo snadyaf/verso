@@ -1,12 +1,10 @@
 
-import { useState } from "react";
 import { DataView } from "primereact/dataview";
 import { Button } from "primereact/button";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { Message } from "primereact/message";
 
 import BookCard from "../BookCard/BookCard";
-import ReservationDialog from "../Reserva/Reserva";
 
 import "./Catalogo.css";
 
@@ -21,23 +19,10 @@ function Catalogo({
   prevUrl,
   onNext,
   onPrev,
+  onReserve,
 }) {
-  const [selectedBook, setSelectedBook] = useState(null);
-  const [reservationVisible, setReservationVisible] = useState(false);
-
-  function handleReserve(book) {
-    setSelectedBook(book);
-    setReservationVisible(true);
-  }
-
-  function handleCloseReservation() {
-    setReservationVisible(false);
-    setSelectedBook(null);
-  }
-
-  function handleReservationConfirmed() {
-    setReservationVisible(false);
-    setSelectedBook(null);
+  if (searched) {
+    return null;
   }
 
   const listTemplate = (items) => (
@@ -46,7 +31,7 @@ function Catalogo({
         <BookCard
           key={book.id}
           book={book}
-          onReserve={handleReserve}
+          onReserve={onReserve}
         />
       ))}
     </div>
@@ -70,25 +55,25 @@ function Catalogo({
               strokeWidth="4"
             />
 
-            <p>Buscando livros...</p>
+            <p>Carregando catálogo...</p>
           </div>
         )}
 
         {error && !loading && (
           <Message
             severity="error"
-            text="Não foi possível buscar os livros agora. Tente novamente."
+            text="Não foi possível carregar o catálogo agora. Tente novamente."
           />
         )}
 
         {!loading &&
           !error &&
-          searched &&
           books.length === 0 && (
-            <Message
-              severity="warn"
-              text={`Nenhum livro encontrado para "${query}".`}
-            />
+            <div className="catalogo-status">
+              <p>
+                Nenhum livro disponível no catálogo.
+              </p>
+            </div>
           )}
 
         {!loading &&
@@ -124,25 +109,9 @@ function Catalogo({
               </div>
             </>
           )}
-
-        {!loading &&
-          !error &&
-          !searched && (
-            <div className="catalogo-status">
-              <p>Use a busca acima para encontrar livros.</p>
-            </div>
-          )}
       </div>
-
-      <ReservationDialog
-        visible={reservationVisible}
-        book={selectedBook}
-        onHide={handleCloseReservation}
-        onReservationConfirmed={handleReservationConfirmed}
-      />
     </section>
   );
 }
 
 export default Catalogo;
-
