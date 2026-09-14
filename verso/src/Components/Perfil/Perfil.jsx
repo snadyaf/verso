@@ -6,7 +6,14 @@ import { Tag } from 'primereact/tag'
 
 import './Perfil.css'
 
+import { useState } from 'react'
+import { Dialog } from 'primereact/dialog'
+
+
 function Perfil() {
+
+  const [reservationsVisible, setReservationsVisible] = useState(false)
+
   const navigate = useNavigate()
 
   const usuario = JSON.parse(localStorage.getItem('currentUser')) || {
@@ -17,7 +24,10 @@ function Perfil() {
   const favoritos = JSON.parse(localStorage.getItem('favorites')) || []
   const queroLer = JSON.parse(localStorage.getItem('wantToRead')) || []
   const jaLi = JSON.parse(localStorage.getItem('read')) || []
-  const reservas = JSON.parse(localStorage.getItem('reservations')) || []
+  const reservas = JSON.parse(
+    localStorage.getItem('reservations') || '[]'
+  )
+
 
   return (
     <main className="perfil-page">
@@ -183,7 +193,7 @@ function Perfil() {
 
               <Button
                 label="Explorar catálogo"
-                onClick={() => navigate('/catalogo')}
+                onClick={() => navigate('/')}
                 className="catalog-button"
               />
             </div>
@@ -216,13 +226,162 @@ function Perfil() {
             label="Ver reservas"
             icon="pi pi-arrow-right"
             iconPos="right"
-            onClick={() => navigate('/reservas')}
+            onClick={() => setReservationsVisible(true)}
             className="reservation-button"
           />
+
 
         </section>
 
       </section>
+
+      <div className="section-heading">
+        <div>
+          <span className="section-eyebrow">
+            Sua coleção
+          </span>
+
+          <h2>
+            Minha Biblioteca
+          </h2>
+        </div>
+
+        <div className="section-actions">
+          <Button
+            label="Explorar catálogo"
+            icon="pi pi-compass"
+            onClick={() => navigate('/')}
+            className="catalog-button"
+          />
+
+          <Button
+            label="Ver biblioteca"
+            icon="pi pi-arrow-right"
+            iconPos="right"
+            text
+            onClick={() => navigate('/biblioteca')}
+            className="section-link"
+          />
+        </div>
+      </div>
+
+      <Dialog
+        header="Minhas Reservas"
+        visible={reservationsVisible}
+        onHide={() => setReservationsVisible(false)}
+        modal
+        dismissableMask
+        className="reservations-dialog"
+        breakpoints={{
+          '960px': '75vw',
+          '640px': '95vw'
+        }}
+      >
+        {reservas.length === 0 ? (
+          <div className="reservations-empty">
+            <i className="pi pi-bookmark" />
+
+            <h3>
+              Nenhuma reserva realizada
+            </h3>
+
+            <p>
+              Explore o catálogo e reserve um livro para
+              encontrá-lo aqui.
+            </p>
+
+            <Button
+              label="Explorar catálogo"
+              icon="pi pi-compass"
+              onClick={() => {
+                setReservationsVisible(false)
+                navigate('/')
+              }}
+            />
+          </div>
+        ) : (
+          <div className="reservations-list">
+
+            {reservas.map((reserva) => (
+              <div
+                key={reserva.id}
+                className="reservation-item"
+              >
+                <img
+                  src={reserva.cover}
+                  alt={reserva.title}
+                  className="reservation-item-cover"
+                />
+
+                <div className="reservation-item-content">
+
+                  <div className="reservation-item-header">
+                    <div>
+                      <h3>
+                        {reserva.title}
+                      </h3>
+
+                      <p>
+                        {reserva.author}
+                      </p>
+                    </div>
+
+                    <Tag
+                      value={reserva.status}
+                      severity="success"
+                    />
+                  </div>
+
+                  <div className="reservation-details">
+
+                    <div>
+                      <span>
+                        <i className="pi pi-calendar" />
+                        Início
+                      </span>
+
+                      <strong>
+                        {new Date(
+                          reserva.startDate
+                        ).toLocaleDateString('pt-BR')}
+                      </strong>
+                    </div>
+
+                    <div>
+                      <span>
+                        <i className="pi pi-calendar-plus" />
+                        Final
+                      </span>
+
+                      <strong>
+                        {new Date(
+                          reserva.endDate
+                        ).toLocaleDateString('pt-BR')}
+                      </strong>
+                    </div>
+
+                  </div>
+
+                  <div className="reservation-contact">
+                    <span>
+                      <i className="pi pi-phone" />
+                      {reserva.phone}
+                    </span>
+
+                    <span>
+                      <i className="pi pi-id-card" />
+                      {reserva.cpf}
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+            ))}
+
+          </div>
+        )}
+      </Dialog>
+
     </main>
   )
 }

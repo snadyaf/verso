@@ -1,7 +1,8 @@
+
 .catalogo {
   min-height: 100vh;
   padding: 64px 32px 80px;
-  background: #14100d;
+  background: #091221;
   color: #f2e9dc;
   font-family: "Segoe UI", sans-serif;
 }
@@ -48,8 +49,18 @@
 
 .catalogo-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 28px;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 32px;
+  align-items: stretch;
+}
+
+.catalogo-grid > * {
+  min-width: 0;
+  height: 100%;
+}
+
+.catalogo-grid .book-card {
+  height: 100%;
 }
 
 .catalogo-pagination {
@@ -58,6 +69,7 @@
   justify-content: center;
   gap: 20px;
   margin-top: 48px;
+  flex-wrap: wrap;
 }
 
 .catalogo-pagination .p-button {
@@ -77,4 +89,76 @@
 .catalogo-page-label {
   color: #cbb99a;
   font-size: 0.9rem;
+}
+
+@media (max-width: 900px) {
+  .catalogo {
+    padding: 52px 24px 64px;
+  }
+
+  .catalogo-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 24px;
+  }
+
+  .catalogo-header {
+    margin-bottom: 44px;
+  }
+
+  .catalogo-header h1 {
+    font-size: 2.3rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .catalogo {
+    padding: 40px 16px 56px;
+  }
+
+  .catalogo-header {
+    margin-bottom: 36px;
+  }
+
+  .catalogo-header h1 {
+    font-size: 2rem;
+  }
+
+  .catalogo-header p {
+    font-size: 0.95rem;
+  }
+
+  .catalogo-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .catalogo-pagination {
+    gap: 12px;
+    margin-top: 36px;
+  }
+
+  .catalogo-pagination .p-button {
+    flex: 1;
+    min-width: 120px;
+  }
+}
+
+@media (max-width: 380px) {
+  .catalogo {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .catalogo-grid {
+    gap: 20px;
+  }
+
+  .catalogo-pagination {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .catalogo-pagination .p-button {
+    width: 100%;
+  }
 }

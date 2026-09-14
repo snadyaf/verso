@@ -20,12 +20,13 @@ export default function Hero({
     prevUrl,
     onNext,
     onPrev,
+    onReserve,
 }) {
 
     const listTemplate = (items) => (
         <div className="hero-results-grid">
             {items.map((book) => (
-                <BookCard key={book.id} book={book} />
+                <BookCard key={book.id} book={book} onReserve={onReserve} />
             ))}
         </div>
     );
@@ -72,11 +73,6 @@ export default function Hero({
                         <Button
                             label="Explorar livros"
                             className="btn-explorar"
-                        />
-
-                        <Button
-                            label="Minha biblioteca"
-                            className="btn-biblioteca"
                         />
 
                     </div>

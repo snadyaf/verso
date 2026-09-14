@@ -5,18 +5,32 @@ import { Dialog } from "primereact/dialog";
 import { getPhysicalAvailability } from "../../fixos/physicalBooks";
 import "./BookCard.css";
 
-function BookCard({ book }) {
+function BookCard({ book, onReserve }) {
   const [showDetails, setShowDetails] = useState(false);
 
   const cover = book.formats?.["image/jpeg"];
-  const authors = book.authors?.map((a) => a.name).join(", ") || "Autor desconhecido";
+  const authors =
+    book.authors?.map((a) => a.name).join(", ") || "Autor desconhecido";
+
   const tags = book.subjects?.slice(0, 3) || [];
 
-  const description = book.summaries?.[0] || "Sem descrição disponível para este livro.";
-  const categories = book.subjects?.length > 0 ? book.subjects : ["Sem categoria"];
+  const description =
+    book.summaries?.[0] ||
+    "Sem descrição disponível para este livro.";
 
-  const pdfUrl = Object.entries(book.formats || {}).find(([type]) => type.includes("pdf"))?.[1];
-  const epubUrl = Object.entries(book.formats || {}).find(([type]) => type.includes("epub"))?.[1];
+  const categories =
+    book.subjects?.length > 0
+      ? book.subjects
+      : ["Sem categoria"];
+
+  const pdfUrl = Object.entries(book.formats || {}).find(
+    ([type]) => type.includes("pdf")
+  )?.[1];
+
+  const epubUrl = Object.entries(book.formats || {}).find(
+    ([type]) => type.includes("epub")
+  )?.[1];
+
   const readUrl = book.formats?.["text/html"];
 
   const physical = getPhysicalAvailability(book.id);
@@ -28,7 +42,9 @@ function BookCard({ book }) {
           {cover ? (
             <img src={cover} alt={book.title} />
           ) : (
-            <div className="bookcard-no-cover">Sem capa</div>
+            <div className="bookcard-no-cover">
+              Sem capa
+            </div>
           )}
 
           {physical.available && (
@@ -40,8 +56,13 @@ function BookCard({ book }) {
         </div>
 
         <div className="bookcard-body">
-          <h3 className="bookcard-title">{book.title}</h3>
-          <p className="bookcard-author">{authors}</p>
+          <h3 className="bookcard-title">
+            {book.title}
+          </h3>
+
+          <p className="bookcard-author">
+            {authors}
+          </p>
 
           {tags.length > 0 && (
             <div className="bookcard-tags">
@@ -51,12 +72,23 @@ function BookCard({ book }) {
             </div>
           )}
 
-          <Button
-            label="Detalhes"
-            className="bookcard-button"
-            outlined
-            onClick={() => setShowDetails(true)}
-          />
+          <div className="bookcard-actions">
+            <Button
+              label="Detalhes"
+              className="bookcard-button"
+              outlined
+              onClick={() => setShowDetails(true)}
+            />
+
+            {physical.available && (
+              <Button
+                label="Reservar"
+                icon="pi pi-bookmark"
+                className="bookcard-reserve-button"
+                onClick={() => onReserve(book)}
+              />
+            )}
+          </div>
         </div>
       </div>
 
@@ -69,17 +101,30 @@ function BookCard({ book }) {
       >
         <div className="bookcard-dialog-content">
           {cover ? (
-            <img src={cover} alt={book.title} className="bookcard-dialog-cover" />
+            <img
+              src={cover}
+              alt={book.title}
+              className="bookcard-dialog-cover"
+            />
           ) : (
-            <div className="bookcard-no-cover bookcard-dialog-no-cover">Sem capa</div>
+            <div className="bookcard-no-cover bookcard-dialog-no-cover">
+              Sem capa
+            </div>
           )}
 
           <div className="bookcard-dialog-info">
-            <p><strong>Autor(es):</strong> {authors}</p>
+            <p>
+              <strong>Autor(es):</strong> {authors}
+            </p>
 
-            <p className="bookcard-dialog-description">{description}</p>
+            <p className="bookcard-dialog-description">
+              {description}
+            </p>
 
-            <p><strong>Categorias:</strong></p>
+            <p>
+              <strong>Categorias:</strong>
+            </p>
+
             <div className="bookcard-dialog-tags">
               {categories.slice(0, 6).map((cat, i) => (
                 <Tag key={i} value={cat} />
@@ -88,20 +133,34 @@ function BookCard({ book }) {
 
             <div className="bookcard-dialog-formats">
               <Tag
-                value={pdfUrl ? "PDF disponível" : "PDF indisponível"}
+                value={
+                  pdfUrl
+                    ? "PDF disponível"
+                    : "PDF indisponível"
+                }
                 severity={pdfUrl ? "success" : "danger"}
               />
+
               <Tag
-                value={epubUrl ? "EPUB disponível" : "EPUB indisponível"}
+                value={
+                  epubUrl
+                    ? "EPUB disponível"
+                    : "EPUB indisponível"
+                }
                 severity={epubUrl ? "success" : "danger"}
               />
+
               <Tag
                 value={
                   physical.available
                     ? `Disponível fisicamente (${physical.quantity} un.)`
                     : "Indisponível fisicamente"
                 }
-                severity={physical.available ? "success" : "danger"}
+                severity={
+                  physical.available
+                    ? "success"
+                    : "danger"
+                }
               />
             </div>
 
@@ -110,26 +169,46 @@ function BookCard({ book }) {
                 <Button
                   label="Ler online"
                   icon="pi pi-book"
-                  onClick={() => window.open(readUrl, "_blank")}
+                  onClick={() =>
+                    window.open(readUrl, "_blank")
+                  }
                 />
               )}
+
               {epubUrl && (
                 <Button
                   label="Baixar EPUB"
                   icon="pi pi-download"
                   outlined
-                  onClick={() => window.open(epubUrl, "_blank")}
+                  onClick={() =>
+                    window.open(epubUrl, "_blank")
+                  }
                 />
               )}
+
               {pdfUrl && (
                 <Button
                   label="Baixar PDF"
                   icon="pi pi-download"
                   outlined
-                  onClick={() => window.open(pdfUrl, "_blank")}
+                  onClick={() =>
+                    window.open(pdfUrl, "_blank")
+                  }
                 />
               )}
             </div>
+
+            {physical.available && (
+              <Button
+                label="Reservar este livro"
+                icon="pi pi-bookmark"
+                className="bookcard-dialog-reserve"
+                onClick={() => {
+                  setShowDetails(false);
+                  onReserve(book);
+                }}
+              />
+            )}
           </div>
         </div>
       </Dialog>

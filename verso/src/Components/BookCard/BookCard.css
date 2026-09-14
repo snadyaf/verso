@@ -1,3 +1,4 @@
+
 .bookcard {
   background: #1e1712;
   border: 1px solid #3d332a;
@@ -6,6 +7,9 @@
   display: flex;
   flex-direction: column;
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  min-width: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .bookcard:hover {
@@ -42,26 +46,26 @@
   position: absolute;
   top: 8px;
   left: 8px;
-
   display: flex;
   align-items: center;
   gap: 4px;
-
+  max-width: calc(100% - 16px);
   background: rgba(20, 80, 55, 0.9);
   color: #baf2cf;
   border: 1px solid rgba(90, 200, 140, 0.5);
-
   font-size: 0.65rem;
   font-weight: 600;
-
   padding: 4px 8px;
   border-radius: 20px;
-
   backdrop-filter: blur(2px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .bookcard-stock-badge .pi {
   font-size: 0.65rem;
+  flex-shrink: 0;
 }
 
 .bookcard-body {
@@ -70,6 +74,7 @@
   flex-direction: column;
   gap: 8px;
   flex: 1;
+  min-width: 0;
 }
 
 .bookcard-title {
@@ -81,11 +86,13 @@
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  margin: 0;
 }
 
 .bookcard-author {
   font-size: 0.82rem;
   color: #a6926f;
+  margin: 0;
 }
 
 .bookcard-tags {
@@ -93,6 +100,7 @@
   flex-wrap: wrap;
   gap: 6px;
   margin: 4px 0 2px;
+  min-width: 0;
 }
 
 .bookcard-tags .p-tag {
@@ -102,18 +110,54 @@
   font-size: 0.68rem;
   font-weight: 500;
   padding: 3px 8px;
+  max-width: 100%;
+}
+
+.bookcard-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 12px;
+  width: 100%;
+  min-width: 0;
+}
+
+.bookcard-actions .p-button {
+  min-width: 0;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bookcard-actions .bookcard-button,
+.bookcard-actions .bookcard-reserve-button {
+  flex: 1 1 0;
+  min-width: 0;
 }
 
 .bookcard-button {
-  margin-top: auto;
   border-color: #a6472e !important;
   color: #f4c95d !important;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
 }
 
 .bookcard-button:hover {
   background: #a6472e !important;
   color: #f2e9dc !important;
+}
+
+.bookcard-reserve-button {
+  border-color: #a6472e;
+  background: #a6472e;
+  color: #f2e9dc;
+  font-size: 0.82rem;
+}
+
+.bookcard-reserve-button:hover {
+  border-color: #8d3d28;
+  background: #8d3d28;
+  color: #f2e9dc;
 }
 
 .bookcard-dialog .p-dialog-header {
@@ -146,6 +190,11 @@
   border-radius: 8px;
   background: #2a2119;
   flex-shrink: 0;
+}
+
+.bookcard-dialog-info {
+  min-width: 0;
+  flex: 1;
 }
 
 .bookcard-dialog-info p {
@@ -199,4 +248,39 @@
 .bookcard-dialog-links .p-button.p-button-outlined {
   border-color: #a6472e;
   color: #f4c95d;
+}
+
+.bookcard-dialog-reserve {
+  width: 100%;
+  margin-top: 20px;
+  border-color: #a6472e;
+  background: #a6472e;
+  color: #f2e9dc;
+}
+
+.bookcard-dialog-reserve:hover {
+  border-color: #8d3d28;
+  background: #8d3d28;
+  color: #f2e9dc;
+}
+
+@media (max-width: 600px) {
+  .bookcard-actions {
+    flex-direction: column;
+  }
+
+  .bookcard-actions .p-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .bookcard-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .bookcard-actions .p-button {
+    width: 100%;
+  }
 }

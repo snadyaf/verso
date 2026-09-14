@@ -253,3 +253,7 @@
         flex-direction: column;
     }
 }
+.hero-results { background: #091221; color: #f2e9dc; }
+.hero-results-grid { background: #091221; }
+.hero-results-status { color: #cbb99a; }
+.hero-results .p-dataview, .hero-results .p-dataview-content { background: transparent; color: inherit; }
