@@ -1,0 +1,152 @@
+.navbar {
+    height: 68px;
+    background-color: #101b2d;
+    border: none;
+    border-bottom: 1px solid #27364b;
+    border-radius: 0;
+    padding: 0 27px;
+}
+
+.navbar-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-right: 45px;
+    text-decoration: none;
+}
+
+.logo-icon {
+    color: #c9a75d;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.logo-text {
+    color: #f5f1e8;
+    font-family: Georgia, serif;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.navbar .p-menubar-root-list {
+    gap: 5px;
+}
+
+.navbar .p-menuitem-link {
+    color: #9caec5;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: transparent;
+}
+
+.navbar .p-menuitem-link:hover {
+    background-color: #182940;
+    color: #f5f1e8;
+}
+
+.navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.navbar-icon-button {
+    width: 38px;
+    height: 38px;
+    color: #8fa2bb !important;
+    border-radius: 8px;
+}
+
+.navbar-icon-button:hover {
+    background-color: #182940 !important;
+    color: #ffffff !important;
+}
+
+.navbar-account {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    color: #9caec5;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.navbar-account:hover {
+    background-color: #182940;
+    color: #f5f1e8;
+}
+
+.navbar-avatar {
+    width: 34px;
+    height: 34px;
+    background-color: #7295b8;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.navbar-login {
+    display: flex;
+    align-items: center;
+    padding: 9px 16px;
+    border: 1px solid #c9a75d;
+    border-radius: 8px;
+    background-color: #1b2c47;
+    color: #f4ead2;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.navbar-login:hover {
+    background-color: #c9a75d;
+    color: #101b2d;
+}
+
+.navbar-logout {
+    color: #9caec5 !important;
+}
+
+.navbar-logout:hover {
+    background-color: #182940 !important;
+    color: #f5f1e8 !important;
+}
+
+.navbar .p-menuitem-link:focus,
+.navbar .p-menuitem-link:focus-visible {
+    outline: none;
+    box-shadow: none;
+}
+
+@media (max-width: 900px) {
+    .navbar-logo {
+        margin-right: 20px;
+    }
+
+    .navbar-account span {
+        display: none;
+    }
+}
+
+@media (max-width: 700px) {
+    .navbar {
+        padding: 0 16px;
+    }
+
+    .navbar-logo {
+        margin-right: 10px;
+    }
+
+    .logo-text {
+        display: none;
+    }
+
+    .navbar-login {
+        padding: 8px 12px;
+    }
+
+    .navbar-logout {
+        display: none;
+    }
+}
