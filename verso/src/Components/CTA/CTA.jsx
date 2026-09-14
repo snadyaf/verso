@@ -26,11 +26,7 @@ export default function CTA() {
 
                 </div>
 
-                <Button
-                    label="Começar agora"
-                    className="cta-button"
-                    
-                />
+                
 
             </div>
 

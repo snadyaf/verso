@@ -38,13 +38,7 @@ export default function Navbar() {
 
   const end = (
     <div className="navbar-actions">
-      <Button
-        icon="pi pi-search"
-        className="navbar-icon-button"
-        text
-        aria-label="Pesquisar"
-      />
-
+   
       <Button
         icon="pi pi-sun"
         className="navbar-icon-button"

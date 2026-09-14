@@ -76,20 +76,12 @@ export default function Hero({
           </form>
 
           <div className="hero-buttons">
-            <Button
-              label="Explorar livros"
-              className="btn-explorar"
-            />
-
-            <Button
-              label="Minha biblioteca"
-              className="btn-biblioteca"
-            />
+        
           </div>
 
           <div className="hero-info">
             <div>
-              <strong>12+</strong>
+              <strong>12k+</strong>
               <small>Obras</small>
             </div>
 
